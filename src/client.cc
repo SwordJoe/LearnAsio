@@ -44,10 +44,12 @@ private:
 };
 
 
-int main()
+int main(int argc, char** argv)
 {
+    std::string servIp(argv[1]);
+    int servPort = std::stoi(argv[2]);
     io_context ioc;
-    std::shared_ptr<Client> client = std::make_shared<Client>(ioc, "192.168.15.193", 8891);
+    std::shared_ptr<Client> client = std::make_shared<Client>(ioc, servIp, servPort);
     bool ret = client->Connect();
     if( ret ){
         std::cout << "connect to server success! local port: " << client->localPort() << std::endl;
